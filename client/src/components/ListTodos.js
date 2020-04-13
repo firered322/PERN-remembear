@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import EditTodo from "./EditTodo";
 
 const ListTodos = () => {
   const [todos, setTodos] = useState([]);
@@ -25,7 +26,7 @@ const ListTodos = () => {
       const response = await fetch(`http://localhost:5000/todos/${id}`, {
         method: "delete",
       });
-      setTodos(todos.filter(todo => todo.todo_id !== id));
+      setTodos(todos.filter((todo) => todo.todo_id !== id));
     } catch (error) {
       console.error(error.message);
     }
@@ -46,7 +47,7 @@ const ListTodos = () => {
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
               <td>
-                <button className="btn btn-dark">Edit</button>
+                <EditTodo todo={todo} />
               </td>
               <td>
                 <button
@@ -58,11 +59,6 @@ const ListTodos = () => {
               </td>
             </tr>
           ))}
-          {/* <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-          </tr> */}
         </tbody>
       </table>
     </Fragment>
